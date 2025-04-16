@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### 🚀 Lumos: Blockchain-Based Space Traffic Management System
 
-## Getting Started
+Lumos is a decentralized application designed to streamline and secure space mission planning. It utilizes **Ethereum smart contracts**, **MetaMask authentication**, and **MongoDB for persistent storage**, enabling various stakeholders to submit and review **launch** and **maneuver** requests transparently and securely.
 
-First, run the development server:
+---
+
+## 🧠 Features
+
+- ✅ **MetaMask Wallet Authentication**
+- ✅ **Role-Based Access Control** (Admin, Regulatory Body, General User)
+- ✅ **Launch Request Submission**
+- ✅ **Maneuver Request Submission with Collision Detection**
+- ✅ **Request Review by Regulatory Bodies**
+- ✅ **MongoDB Persistence for Users and Requests**
+- ✅ **Space-Themed Dashboards with Interactive UI**
+- ✅ **Smart Contract Events for Transparency**
+- ✅ **Dynamic Admin Analytics Panel**
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer           | Technologies Used |
+|----------------|-------------------|
+| Smart Contracts | Solidity, Hardhat |
+| Frontend        | Next.js, React, Tailwind CSS |
+| Wallet          | MetaMask + ethers.js |
+| Backend API     | Express.js + Node.js |
+| Database        | MongoDB + Mongoose |
+| Blockchain      | Local Hardhat Node (Ethereum) |
+
+---
+
+## 🛠️ Installation Guide
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/lumos-space-traffic.git
+cd lumos-space-traffic
+```
+
+### 2. Install Dependencies
+
+```bash
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd ../frontend
+npm install
+```
+
+### 3. Set Up MongoDB
+
+- Download and install [MongoDB Compass](https://www.mongodb.com/try/download/compass)
+- Create a database named `lumosDB`
+- Add collections:
+  - `users`
+  - `launchrequests`
+  - `maneuverrequests`
+
+> 🔐 Store MongoDB connection string in a `.env` file inside `/backend`:
+
+```
+MONGODB_URI=mongodb://localhost:27017/lumosDB
+```
+
+### 4. Run Hardhat Node and Deploy Contracts
+
+```bash
+cd backend
+npx hardhat node
+npx hardhat run scripts/deploy.js --network localhost
+```
+
+### 5. Start Backend
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 6. Start Frontend
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+cd ../frontend
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Then open: [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Folder Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+lumos-space-traffic/
+├── backend/
+│   ├── contracts/            # Solidity smart contracts
+│   ├── api/                  # Express API routes
+│   ├── models/               # MongoDB schemas
+│   ├── utils/                # Contract loader, user store, etc.
+│   ├── scripts/              # Hardhat deployment script
+│   └── .env
+├── frontend/
+│   ├── app/                  # Next.js pages and routes
+│   ├── components/           # UI components (dashboards, forms)
+│   └── lib/contract.js       # ethers.js contract connection
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🔐 Roles & Permissions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Role             | Permissions |
+|------------------|-------------|
+| Admin            | View analytics, all requests, all users |
+| Regulatory Body  | Review launch & maneuver requests |
+| General User     | Submit launch & maneuver requests |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛰️ Smart Contract Summary
+
+- Written in Solidity
+- Stores requests with status
+- Uses `keccak256` hashing to **detect collisions**
+- Emits events on:
+  - Role assignment
+  - Request submission
+  - Request review
+
+---
+
+## 🧪 Example Accounts (Localhost)
+
+Use these with MetaMask (from Hardhat):
+
+```
+Private Key 1: 0x...
+Private Key 2: 0x...
+...
+```
+
+Assign roles using the registration form on the frontend.
+
+---
+
+## ✅ Future Improvements
+
+- Use IPFS to store payload documents
+- Deploy to Ethereum testnet (e.g., Sepolia)
+- Role-based dashboards using JWT instead of session storage
+- Integrate email notifications on request updates
+
